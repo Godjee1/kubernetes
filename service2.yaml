@@ -10,6 +10,3 @@ spec:
   - name: nginx-port
     protocol: TCP
     port: 80
-  - name: busybox-port
-    protocol: TCP
-    port: 53
