@@ -15,11 +15,10 @@ spec:
       containers:
       - name: nginx
         image: nginx
-        command: ['sh', '-c', 'echo The app is running!']
         ports:
         - containerPort: 80
       initContainers:
       - name: busybox
         image: busybox:1.28
-        command: ['sh', '-c', 'until nslookup nginx-service; do echo "Waiting for nginx-service"; sleep 2; done']
+        command: ['sh', '-c', 'until nslookup nginx-service.default.svc.cluster.local; do echo "Waiting for nginx-service"; sleep 2; done']
 
