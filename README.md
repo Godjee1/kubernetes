@@ -9,12 +9,10 @@
 \
 2.
 Данная часть задания выполнялась из kubernetes/deploy2.yaml и kubernetes/service2.yaml
+![Alt text](<Pasted Graphic.png>)
+![Alt text](<Pasted Graphic 1.png>)
+![Alt text](<Pasted Graphic 2.png>)
 \
-![Alt text](<Pasted Graphic 30.png>)
-![Alt text](<Pasted Graphic 31.png>)
-![Alt text](<Pasted Graphic 32.png>)
-![Alt text](<Pasted Graphic 33.png>)
-![Alt text](<Pasted Graphic 34.png>)
 \
 \
 \
