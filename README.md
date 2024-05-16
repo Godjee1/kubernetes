@@ -1,4 +1,19 @@
 # kubernetes
+## Задание 1.4
+## «Сетевое взаимодействие в K8S. Часть 1»
+1.
+Данная часть задания выполнялась из kubernetes/deploy.yaml и kubernetes/service.yaml
+![Alt text](<Pasted Graphic 3.png>)
+\
+2.
+Данная часть задания выполнялась из kubernetes/deploy.yaml и kubernetes/service-nodePort.yaml
+![Alt text](<Pasted Graphic 5-1.png>)
+![Alt text](<Pasted Graphic 6.png>)
+\
+\
+\
+\
+\
 ## Задание 1.3
 ### «Запуск приложений в K8S»
 1.

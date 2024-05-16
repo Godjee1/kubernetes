@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nginx-mt-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: nginx
@@ -19,11 +19,11 @@ spec:
         image: wbitt/network-multitool
         env:
         - name: HTTP_PORT
-          value: "1180"
+          value: "8080"
         - name: HTTPS_PORT
           value: "11443"
         ports:
-        - containerPort: 1180
+        - containerPort: 8080
           name: hhtp-port
         - containerPort: 11443
           name: https-port
