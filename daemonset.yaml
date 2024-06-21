@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nodes-log-reader
+spec:
+  selector:
+    matchLabels:
+      app: nodes-log-reader
+  template: 
+    metadata:
+      labels:
+        app: nodes-log-reader
+    spec:
+      containers:
+        - name: multitool
+          image: wbitt/network-multitool
+          command: ['sh', '-c', 'echo "reading logs of nodes" && tail -f /nodes-logs/syslog' ]
+          volumeMounts:
+            - name: syslog
+              mountPath: /nodes-logs
+      volumes: 
+        - name: syslog
+          hostPath:
+            path: /var/log
+            type: Directory
+          

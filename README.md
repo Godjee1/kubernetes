@@ -1,9 +1,9 @@
 # kubernetes
-## Задание 1.4
-## «Сетевое взаимодействие в K8S. Часть 2»
+## Задание 2.1
+## «Хранение в K8s. Часть 1»
 1.
-Данная часть выполнялась из kubernetes/deployment-backend.yaml kubernetes/deployment-frontend.yaml kubernetes/service.yaml kubernetes/service2.yaml
-![Alt text](<© 181422.png>)
+Данная часть выполнялась из kkubernetes/deployment.yaml
+![Alt text](<Pasted Graphic 3.png>)
 \
-2. Данная часть выполнялась из kubernetes/ingress.yaml
-![Alt text](<Pasted Graphic 20.png>)
+2. Данная часть выполнялась из kubernetes/daemonset.yaml
+![Alt text](<Pasted Graphic 4.png>)

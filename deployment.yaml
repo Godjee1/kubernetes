@@ -11,17 +11,14 @@ spec:
       labels:
         app: myapp
     spec:
-      containers:
-        - name: createDir
+      initContainers:
+        - name: createdir
           image: alpine
-          command: ['sh', '-c', 'sleep 5 && echo "Creating dir" && mkdir -p /opt/log && echo test > /opt/logs/test.txt && sleep infinity']
+          command: ['sh', '-c', 'echo "Creating dir" && mkdir -p /opt/logs && echo test > /opt/logs/test.txt']
           volumeMounts:
             - name: logs
               mountPath: /opt
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+      containers:
         - name: busybox
           image: busybox:1.28
           command: [ "sh", "-c", "while [ true ]; do echo 'Writing logs now..'; sleep 5; done | tee -a /opt/logs/logs.txt" ]
