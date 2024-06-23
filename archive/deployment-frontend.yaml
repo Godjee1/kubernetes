@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: nginx-container
-        image: nginx
+        image: godjee/nginx-test-l:1.6
         ports:
         - containerPort: 80

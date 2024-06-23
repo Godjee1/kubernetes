@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-volumes
+  name: appvolumes-busybox-multitool
 spec:
   selector:
     matchLabels:
@@ -11,41 +11,28 @@ spec:
       labels:
         app: myapp
     spec:
-      initContainers:
-        - name: createdir
-          image: alpine
-          command: ['sh', '-c', 'echo "Creating dir" && mkdir -p /opt/logs && echo test > /opt/logs/test.txt']
-          volumeMounts:
-            - name: logs
-              mountPath: /opt
       containers:
         - name: busybox
           image: busybox:1.28
-          command: [ "sh", "-c", "while [ true ]; do echo 'Writing logs now..'; sleep 5; done | tee -a /opt/logs/logs.txt" ]
+          command: [ "sh", "-c", "while [ true ]; do echo 'Writing logs now..'; sleep 5; done | tee -a /mnt/testfolder/logs.txt" ]
           volumeMounts:
-            - name: logs
-              mountPath: /opt
+              - name: testvolume
+                mountPath: /mnt/testfolder
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
         - name: multitool
           image: wbitt/network-multitool
-          command: ['sh', '-c', 'echo "The logs is running!" && tail -f /opt/logs/logs.txt']
+          command: ['sh', '-c', 'echo "The logs is running!" && tail -f /mnt/testfolder/logs.txt' ]
+          volumeMounts:
+              - name: testvolume
+                mountPath: /mnt/testfolder
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
-          env:
-          - name: HTTP_PORT
-            value: "8080"
-          - name: HTTPS_PORT
-            value: "11443"
-          ports:
-          - containerPort: 8080
-          volumeMounts:
-            - name: logs
-              mountPath: /opt
       volumes:
-          - name: logs
-            emptyDir: {}
+        - name: testvolume
+          persistentVolumeClaim:
+            claimName: mypvc

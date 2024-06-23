@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-for-sc
+spec:
+  selector:
+    matchLabels:
+      app: myapp-sc
+  template:
+    metadata:
+      labels:
+        app: myapp-sc
+    spec:
+      containers:
+      - name: multitool-with-sc
+        image: wbitt/network-multitool
+        command: ['sh', '-c', 'echo "reading and writing logs" && touch /mnt/share/logs.txt && tail -f /mnt/share/logs.txt']
+        volumeMounts:
+          - name: sc-volume
+            mountPath: /mnt/share
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      volumes:
+      - name: sc-volume
+        persistentVolumeClaim:
+          claimName: mypvc-sc
