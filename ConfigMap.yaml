@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Web Page</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f8ff;
+                color: #333;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .container {
+                text-align: center;
+            }
+            h1 {
+                font-size: 3em;
+                margin: 0;
+            }
+            p {
+                font-size: 1.2em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome to My Web Page</h1>
+            <p>This is a first page for ConfigMap homework.</p>
+        </div>
+    </body>
+    </html>
+  default.conf: |
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+
+        error_page  500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+  HTTP_PORT: "8080"
+  HTTPS_PORT: "11443"

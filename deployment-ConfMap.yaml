@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-multitool-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx-multitool
+  template:
+    metadata:
+      labels:
+        app: nginx-multitool
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-html
+          mountPath: /usr/share/nginx/html
+        - name: nginx-conf
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: default.conf
+      - name: multitool
+        image: wbitt/network-multitool
+        env:
+        - name: HTTP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: HTTP_PORT
+        - name: HTTPS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: HTTPS_PORT
+        ports:
+        - containerPort: 8080
+          name: http-port
+        - containerPort: 11443
+          name: https-port
+        resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+      volumes:
+      - name: nginx-html
+        configMap:
+          name: app-config
+          items:
+          - key: index.html
+            path: index.html
+      - name: nginx-conf
+        configMap:
+          name: app-config
+          items:
+          - key: default.conf
+            path: default.conf
